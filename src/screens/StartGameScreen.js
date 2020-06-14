@@ -8,17 +8,35 @@ import Input from '../components/Input';
 
 const StartGameScreen = props => {
     const [enteredNumber, setEnteredNumber] = useState("");
-
+    const [confirmedNumber, setConfirmedNumber] = useState("");
+    const [confirmed, setConfirmed] = useState(false);
     const onChangeInputHandler = inputText => {
         setEnteredNumber(inputText.replace(/[^0-9]/g, ""));
     }
 
+    const resetInputHandler = () => {
+        setEnteredNumber("");
+        setConfirmed(false);
+    }
+
+    const submitInputHandler = () => {
+        setConfirmed(true);
+        setEnteredNumber("");
+        setConfirmedNumber(parseInt(enteredNumber));
+    }
+
+    
+    let confirmedOutput = "";
+    if (confirmed) {
+        confirmedOutput = <Text> Choosen number is {confirmedNumber}</Text>
+    }
+
     return (
-        <TouchableWithoutFeedback onPress = {()=>{ Keyboard.dismiss() }}>
+        <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
             <View style={styles.screen}>
                 <Text style={styles.title}>
                     Start a new game!
-            </Text>
+                </Text>
                 <Card style={styles.inputContainer}>
                     <Text>Select a Number</Text>
                     <Input
@@ -33,13 +51,15 @@ const StartGameScreen = props => {
                     />
                     <View style={styles.buttonContainer}>
                         <View style={styles.button}>
-                            <Button title="Reset" color={Colors.accent} />
+                            <Button title="Reset" color={Colors.accent} onPress={resetInputHandler} />
                         </View>
                         <View style={styles.button}>
-                            <Button title="Submit" color={Colors.primary} />
+                            <Button title="Submit" color={Colors.primary} onPress={submitInputHandler} />
                         </View>
                     </View>
                 </Card>
+                {confirmed && <Text> Choosen number is {confirmedNumber}</Text>}
+                {/* {confirmedOutput} */}
             </View>
         </TouchableWithoutFeedback>
     )
