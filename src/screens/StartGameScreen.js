@@ -1,10 +1,11 @@
 //@refresh reset
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 
 import Card from '../components/Card';
 import Colors from '../constants/colors';
 import Input from '../components/Input';
+import NumberContainer from '../components/NumberContainer';
 
 const StartGameScreen = props => {
     const [enteredNumber, setEnteredNumber] = useState("");
@@ -20,15 +21,34 @@ const StartGameScreen = props => {
     }
 
     const submitInputHandler = () => {
+        const inputNumber = parseInt(enteredNumber)
+
+        if (isNaN(inputNumber) || inputNumber <= 0 || inputNumber > 99) {
+            Alert.alert(
+                "Invalid number",
+                "Number must be between 1 and 99",
+                [{ text: "Okay", style: "destructive" }]);
+            setEnteredNumber("");
+            return;
+
+        }
         setConfirmed(true);
         setEnteredNumber("");
-        setConfirmedNumber(parseInt(enteredNumber));
+        setConfirmedNumber(inputNumber);
+        Keyboard.dismiss();
     }
 
-    
-    let confirmedOutput = "";
+
+    let confirmedOutput;
     if (confirmed) {
-        confirmedOutput = <Text> Choosen number is {confirmedNumber}</Text>
+        confirmedOutput =
+            <Card style={styles.summaryContainer}>
+                <Text> You selected: </Text>
+                <View>
+                    <NumberContainer>{confirmedNumber}</NumberContainer>
+                    <Button title="START GAME"/>
+                </View>
+            </Card>
     }
 
     return (
@@ -58,8 +78,7 @@ const StartGameScreen = props => {
                         </View>
                     </View>
                 </Card>
-                {confirmed && <Text> Choosen number is {confirmedNumber}</Text>}
-                {/* {confirmedOutput} */}
+                {confirmedOutput}
             </View>
         </TouchableWithoutFeedback>
     )
@@ -92,6 +111,10 @@ const styles = StyleSheet.create({
     input: {
         width: 50,
         textAlign: "center"
+    },
+    summaryContainer: {
+        marginTop: 20,
+        alignItems: "center"  // TODO - not formatting the Number Container as stretch
     }
 });
 
