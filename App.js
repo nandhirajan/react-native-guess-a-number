@@ -19,7 +19,10 @@ export default function App() {
   let content = <StartGameScreen onStartGame={startGameHandler} />;
 
   if (userNumber) {
-    content = <GameScreen restartGameHandler={restartGameHandler} />
+    content = <GameScreen
+      userChoice={userNumber}
+      restartGameHandler={restartGameHandler}
+    />
   }
   return (
     <View style={styles.container}>
