@@ -17,13 +17,17 @@ const GameOverScreen = props => {
                 <Image
                     fadeDuration={1000}
                     // source={SuccessImage} // To load image locally
-                    source={{uri:"https://cdn.pixabay.com/photo/2019/01/22/18/30/summit-3948706_960_720.jpg"}}
+                    source={{ uri: "https://cdn.pixabay.com/photo/2019/01/22/18/30/summit-3948706_960_720.jpg" }}
                     style={styles.image}
                     resizeMode="cover"
                 />
             </View>
-            <BodyText>Number of rounds {guessRounds}</BodyText>
-            <BodyText>Number was {userNumber}</BodyText>
+            <View style={styles.resultContainer}>
+                <BodyText style ={styles.resultText}>
+                    Your phone needed <Text style={styles.highlightedText}>{guessRounds}</Text>
+                    rounds to guess the number <Text style={styles.highlightedText}>{userNumber}</Text>
+                </BodyText>
+            </View>
             <Button
                 title="Play Again!"
                 color={Colors.primary}
@@ -49,10 +53,21 @@ const styles = StyleSheet.create({
     imageContainer: {
         width: 300,
         height: 300,
-        borderRadius:150,
-        borderWidth:3,
+        borderRadius: 150,
+        borderWidth: 3,
         borderColor: "black",
-        overflow:"hidden"
+        overflow: "hidden"
+    },
+    highlightedText: {
+        color: Colors.primary,
+        fontFamily: "open-sans-bold"
+    },
+    resultContainer: {
+        marginHorizontal: 30,
+        marginVertical: 15
+    },
+    resultText:{
+        textAlign: "center"
     }
 })
 
