@@ -2,14 +2,15 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import Colors from '../constants/colors'
+import DefaultStyles from '../constants/default-styles';
 
 const GameOverScreen = props => {
     const { guessRounds, userNumber, onResetGame } = props;
     return (
         <View style={styles.screen}>
-            <Text>Game Over!</Text>
-            <Text>Number of rounds {guessRounds}</Text>
-            <Text>Number was {userNumber}</Text>
+            <Text style={DefaultStyles.bodyText}>Game Over!</Text>
+            <Text style={DefaultStyles.bodyText}>Number of rounds {guessRounds}</Text>
+            <Text style={DefaultStyles.bodyText}>Number was {userNumber}</Text>
             <Button
                 title="Play Again!"
                 color={Colors.primary}
