@@ -1,7 +1,7 @@
 //@refresh reset
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, Alert } from 'react-native';
-
+import { Ionicons } from '@expo/vector-icons';
 
 import BodyText from '../components/BodyText';
 import Card from '../components/Card';
@@ -68,13 +68,13 @@ const GameScreen = props => {
                     color={Colors.accent}
                     onPress={() => { nextGuessHandler("lower") }}
                 >
-                    LOWER
+                    <Ionicons name="md-remove" size={24} color="white"/>
                 </MainButton>
                 <MainButton
                     color={Colors.primary}
                     onPress={() => { nextGuessHandler("higher") }}
                 >
-                    GREATER
+                    <Ionicons name="md-add" size={24} color="white"/>
                 </MainButton>
             </Card>
             <View style={styles.restartGame}>
