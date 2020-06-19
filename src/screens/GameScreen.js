@@ -1,5 +1,5 @@
 //@refresh reset
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 
 import NumberContainer from '../components/NumberContainer';
@@ -19,13 +19,21 @@ const generateRandomBetween = (min, max, exclude) => {
 
 const GameScreen = props => {
     const [currentGuess, setCurrentGuess] = useState(generateRandomBetween(1, 100, props.userChoice));
+    const [numOfGuess, setNumOfGuess] = useState(0);
 
     const currentLow = useRef(1);
     const currentHigh = useRef(100);
 
+    const { userChoice, onGameOver, onResetGame } = props;
+    useEffect(() => {
+        if (currentGuess === userChoice) {
+            onGameOver(numOfGuess);
+        }
+    }, [currentGuess, userChoice, onGameOver]);
+
     const nextGuessHandler = (direction) => {
-        if ((direction === "lower" && currentGuess < props.userChoice) ||
-            (direction === "higher" && currentGuess > props.userChoice)) {
+        if ((direction === "lower" && currentGuess < userChoice) ||
+            (direction === "higher" && currentGuess > userChoice)) {
             Alert.alert(
                 "Don't lie",
                 "You know that this is wrong!",
@@ -42,6 +50,7 @@ const GameScreen = props => {
 
         const nextNumber = generateRandomBetween(currentLow.current, currentHigh.current, currentGuess);;
         setCurrentGuess(nextNumber);
+        setNumOfGuess(numOfGuess => numOfGuess + 1);
     }
 
     return (
@@ -53,7 +62,7 @@ const GameScreen = props => {
                 <Button title="UPPER" color={Colors.primary} onPress={() => { nextGuessHandler("higher") }} />
             </Card>
             <View style={styles.restartGame}>
-                <Button title="Restart Game!" color={Colors.primary} onPress={props.restartGameHandler} />
+                <Button title="Restart Game!" color={Colors.primary} onPress={onResetGame} />
             </View>
         </View>
     )
