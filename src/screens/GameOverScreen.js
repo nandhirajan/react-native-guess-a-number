@@ -15,7 +15,9 @@ const GameOverScreen = props => {
             <TitleText>Game Over!</TitleText>
             <View style={styles.imageContainer}>
                 <Image
-                    source={SuccessImage}
+                    fadeDuration={1000}
+                    // source={SuccessImage} // To load image locally
+                    source={{uri:"https://cdn.pixabay.com/photo/2019/01/22/18/30/summit-3948706_960_720.jpg"}}
                     style={styles.image}
                     resizeMode="cover"
                 />
