@@ -29,7 +29,7 @@ const GameScreen = props => {
         if (currentGuess === userChoice) {
             onGameOver(numOfGuess);
         }
-    }, [currentGuess, userChoice, onGameOver]);
+    },[ currentGuess, userChoice, numOfGuess]);
 
     const nextGuessHandler = (direction) => {
         if ((direction === "lower" && currentGuess < userChoice) ||
