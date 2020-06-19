@@ -1,16 +1,25 @@
 //@refresh reset
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, Image } from 'react-native';
 
 import Colors from '../constants/colors'
 import DefaultStyles from '../constants/default-styles';
-import BodyText from '../components/BodyText' ;
+import BodyText from '../components/BodyText';
+import TitleText from '../components/TitleText';
+import SuccessImage from '../../assets/images/success.png'
 
 const GameOverScreen = props => {
     const { guessRounds, userNumber, onResetGame } = props;
     return (
         <View style={styles.screen}>
-            <BodyText>Game Over!</BodyText>
+            <TitleText>Game Over!</TitleText>
+            <View style={styles.imageContainer}>
+                <Image
+                    source={SuccessImage}
+                    style={styles.image}
+                    resizeMode="cover"
+                />
+            </View>
             <BodyText>Number of rounds {guessRounds}</BodyText>
             <BodyText>Number was {userNumber}</BodyText>
             <Button
@@ -30,6 +39,18 @@ const styles = StyleSheet.create({
     },
     restartGame: {
         marginTop: 20
+    },
+    image: {
+        width: "100%",
+        height: "100%",
+    },
+    imageContainer: {
+        width: 300,
+        height: 300,
+        borderRadius:150,
+        borderWidth:3,
+        borderColor: "black",
+        overflow:"hidden"
     }
 })
 
