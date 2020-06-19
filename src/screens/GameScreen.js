@@ -10,6 +10,7 @@ import DefaultStyles from '../constants/default-styles';
 import NumberContainer from '../components/NumberContainer';
 import Title from '../components/TitleText';
 import TitleText from '../components/TitleText';
+import MainButton from '../components/MainButton';
 
 const generateRandomBetween = (min, max, exclude) => {
     min = Math.ceil(min);
@@ -34,7 +35,7 @@ const GameScreen = props => {
         if (currentGuess === userChoice) {
             onGameOver(numOfGuess);
         }
-    },[ currentGuess, userChoice, numOfGuess]);
+    }, [currentGuess, userChoice, numOfGuess]);
 
     const nextGuessHandler = (direction) => {
         if ((direction === "lower" && currentGuess < userChoice) ||
@@ -63,11 +64,23 @@ const GameScreen = props => {
             <TitleText> Opponent's Guess is</TitleText>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card style={styles.buttonContainer}>
-                <Button title="LOWER" color={Colors.accent} onPress={() => { nextGuessHandler("lower") }} />
-                <Button title="UPPER" color={Colors.primary} onPress={() => { nextGuessHandler("higher") }} />
+                <MainButton
+                    color={Colors.accent}
+                    onPress={() => { nextGuessHandler("lower") }}
+                >
+                    LOWER
+                </MainButton>
+                <MainButton
+                    color={Colors.primary}
+                    onPress={() => { nextGuessHandler("higher") }}
+                >
+                    GREATER
+                </MainButton>
             </Card>
             <View style={styles.restartGame}>
-                <Button title="Restart Game!" color={Colors.primary} onPress={onResetGame} />
+                <MainButton 
+                color={Colors.primary} 
+                onPress={onResetGame} >Restart Game</MainButton>
             </View>
         </View>
     )

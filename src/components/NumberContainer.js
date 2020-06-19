@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         alignItems: "center",
         justifyContent: "center"
-
     },
     number:{
         color: Colors.accent,

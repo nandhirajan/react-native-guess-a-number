@@ -7,6 +7,7 @@ import DefaultStyles from '../constants/default-styles';
 import BodyText from '../components/BodyText';
 import TitleText from '../components/TitleText';
 import SuccessImage from '../../assets/images/success.png'
+import MainButton from '../components/MainButton';
 
 const GameOverScreen = props => {
     const { guessRounds, userNumber, onResetGame } = props;
@@ -23,16 +24,17 @@ const GameOverScreen = props => {
                 />
             </View>
             <View style={styles.resultContainer}>
-                <BodyText style ={styles.resultText}>
+                <BodyText style={styles.resultText}>
                     Your phone needed <Text style={styles.highlightedText}>{guessRounds}</Text>
                     rounds to guess the number <Text style={styles.highlightedText}>{userNumber}</Text>
                 </BodyText>
             </View>
-            <Button
-                title="Play Again!"
+            <MainButton
                 color={Colors.primary}
                 onPress={onResetGame}
-                style={styles.restartGame} />
+                style={styles.restartGame} >
+                Play Again!
+            </MainButton>
         </View>
     )
 }
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 30,
         marginVertical: 15
     },
-    resultText:{
+    resultText: {
         textAlign: "center"
     }
 })
