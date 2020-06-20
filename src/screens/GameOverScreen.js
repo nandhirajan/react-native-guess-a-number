@@ -1,9 +1,8 @@
 //@refresh reset
 import React from 'react';
-import { View, Text, Button, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
 import Colors from '../constants/colors'
-import DefaultStyles from '../constants/default-styles';
 import BodyText from '../components/BodyText';
 import TitleText from '../components/TitleText';
 import SuccessImage from '../../assets/images/success.png'
